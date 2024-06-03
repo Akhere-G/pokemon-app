@@ -16,6 +16,7 @@ An app that shows the first 150 pokemon. Built by Akhere Ihoeghinlan.
 
 1. Search page based on the available pages
 2. Sound
+3. Abilities
 
 ### Could:
 
@@ -24,4 +25,4 @@ An app that shows the first 150 pokemon. Built by Akhere Ihoeghinlan.
 
 ### Would:
 
-1. moves information (too much information)
+1. Moves information (too much information)
