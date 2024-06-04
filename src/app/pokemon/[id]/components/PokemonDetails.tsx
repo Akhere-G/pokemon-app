@@ -51,6 +51,28 @@ const Entries = ({
     </div>
   );
 };
+interface Stat {
+  base_stat: number;
+  stat: {
+    name: string;
+  };
+}
+const Stats = ({ stats }: { stats: Stat[] }) => {
+  return (
+    <div className="flex justify-center md:justify-between gap-2 flex-wrap items-center mb-4">
+      {stats.map(({ stat, base_stat }) => (
+        <div
+          className="text-center rounded-full border-4 p-4 w-36 h-36 flex items-center justify-center flex-col gap-4"
+          key={stat.name}
+        >
+          <p>{stat.name.split("-").map(capitalise).join(" ")}</p>
+          <p>{base_stat}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 function PokemonDetails() {
   const { id } = useParams<{ id: string }>();
 
@@ -73,6 +95,9 @@ function PokemonDetails() {
     flavor_text_entries,
     genera,
     evolves_from_species,
+    is_baby,
+    is_legendary,
+    is_mythical,
   } = pokemonSpeciesDetails.data;
 
   let evolvesFromSpeciesId = "";
@@ -81,66 +106,94 @@ function PokemonDetails() {
     const paths = evolves_from_species.url.split("/");
     evolvesFromSpeciesId = paths[paths.length - 2];
   }
-  return (
-    <div className="flex gap-2 flex-col sm:flex-row sm:p-4">
-      <div className=" flex flex-col items-center flex-[0.4] relative">
-        <h2 className="text-2xl">{capitalise(name)}</h2>
-        <small>
-          {genera.find((g) => g.language.name === "en")?.genus ?? ""}
-        </small>
-        <Image
-          src={getFrontImage(id)}
-          alt={`iamge of pokemon ${name}`}
-          width={200}
-          height={200}
-        />
+  const tags: string[] = [];
+  if (is_baby) {
+    tags.push("Baby");
+  }
+  if (is_legendary) {
+    tags.push("Lengendary");
+  }
+  if (is_mythical) {
+    tags.push("Mythical");
+  }
 
-        <div className="w-full">
-          <Field label="Type">
-            <p className="flex gap-2 flex-wrap justify-end">
-              {types.map(({ type: { name } }) => (
-                <span
-                  style={{ backgroundColor: typeToColor(name) }}
-                  className="pill"
-                  key={name}
-                >
-                  {name}
-                </span>
-              ))}
-            </p>
-          </Field>
-          <Field label="Abilities">
-            <p className="flex gap-2 flex-wrap justify-end">
-              {abilities.map(({ ability: { name } }) => (
-                <span
-                  style={{ backgroundColor: typeToColor(name) }}
-                  className="pill"
-                  key={name}
-                >
-                  {name}
-                </span>
-              ))}
-            </p>
-          </Field>
-          {evolves_from_species && (
-            <Field label="Evolves from">
-              <Link className="link" href={`pokemon/${evolvesFromSpeciesId}`}>
-                {capitalise(evolves_from_species.name)}
-              </Link>
+  return (
+    <div>
+      <div className="flex gap-2 flex-col sm:flex-row sm:p-4">
+        <div className=" flex flex-col items-center flex-1 relative">
+          <h2 className="text-2xl">{capitalise(name)}</h2>
+          <small>
+            {genera.find((g) => g.language.name === "en")?.genus ?? ""}
+          </small>
+          <Image
+            src={getFrontImage(id)}
+            alt={`iamge of pokemon ${name}`}
+            width={200}
+            height={200}
+          />
+
+          <div className="w-full">
+            <Field label="Type">
+              <p className="flex gap-2 flex-wrap justify-end">
+                {types.map(({ type: { name } }) => (
+                  <span
+                    style={{ backgroundColor: typeToColor(name) }}
+                    className="pill"
+                    key={name}
+                  >
+                    {name}
+                  </span>
+                ))}
+              </p>
             </Field>
-          )}
-          <Field label="Base Happiness">
-            <p>{base_happiness}</p>
-          </Field>
-          <Field label="Capture Rate">
-            <p>{capture_rate}</p>
-          </Field>
+            <Field label="Abilities">
+              <p className="flex gap-2 flex-wrap justify-end">
+                {abilities.map(({ ability: { name } }) => (
+                  <span
+                    style={{ backgroundColor: typeToColor(name) }}
+                    className="pill"
+                    key={name}
+                  >
+                    {name}
+                  </span>
+                ))}
+              </p>
+            </Field>
+            {evolves_from_species && (
+              <Field label="Evolves from">
+                <Link className="link" href={`pokemon/${evolvesFromSpeciesId}`}>
+                  {capitalise(evolves_from_species.name)}
+                </Link>
+              </Field>
+            )}
+            <Field label="Base Happiness">
+              <p>{base_happiness}</p>
+            </Field>
+            <Field label="Capture Rate">
+              <p>{capture_rate}</p>
+            </Field>
+            {tags.length > 0 && (
+              <Field label="Tags">
+                {tags.map((name) => (
+                  <span
+                    style={{ backgroundColor: typeToColor("dragon") }}
+                    className="pill"
+                    key={name}
+                  >
+                    {name}
+                  </span>
+                ))}
+              </Field>
+            )}
+          </div>
+        </div>
+        <div className="md:w-[1.5px] md:bg-slate-200 md:mx-4" />
+        <div className="flex-1 sm:h-[100%]">
+          <Entries entries={flavor_text_entries} />
         </div>
       </div>
-      <div className="md:w-[1.5px] md:bg-slate-200 md:mx-4" />
-      <div className="flex-[0.6] sm:h-[100%]">
-        <Entries entries={flavor_text_entries} />
-      </div>
+      <h2 className="text-2xl text-center mb-4">Stats</h2>
+      <Stats stats={stats} />
     </div>
   );
 }
