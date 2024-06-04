@@ -4,7 +4,11 @@ import { Pokemon, PokemonList, PokemonSpecies } from "../types/pokemonTypes";
 
 export const queryClient = new QueryClient();
 
-export const useFetchPokemonList = (limit: number = 3, offset: number = 0) => {
+export const useFetchPokemonList = (
+  limit: number = 3,
+  offset: number = 0,
+  search?: string
+) => {
   return useQuery({
     queryKey: ["pokemon", limit, offset],
 

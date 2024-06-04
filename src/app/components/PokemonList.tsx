@@ -1,6 +1,6 @@
 "use client";
 import { QueryClientProvider } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   queryClient,
   useFetchMorePokemon,
@@ -8,9 +8,12 @@ import {
 } from "../services/queries";
 import PokemonCard from "./PokemonCard";
 import { PokemonList as IPokemonList } from "../types/pokemonTypes";
+import { useSearchParams } from "next/navigation";
 
 const pokemonPerPage = 20;
 function PokemonList() {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
   const [offset, setOffset] = useState(0);
   const [pokemonList, setPokemonList] = useState<IPokemonList | null>(null);
   const pokemonListData = useFetchPokemonList(pokemonPerPage);
@@ -35,6 +38,16 @@ function PokemonList() {
     }
   }, [morePokemonData]);
 
+  const filteredPokemon = useMemo(() => {
+    if (!pokemonList) {
+      return [];
+    }
+    if (!search) {
+      return pokemonList.results;
+    }
+    return pokemonList.results.filter(({ name }) => name.includes(search));
+  }, [pokemonList, search]);
+
   if (pokemonListData.isLoading) {
     return <h2>Loading...</h2>;
   }
@@ -51,7 +64,7 @@ function PokemonList() {
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4">
-        {pokemonList.results.map((pokemon) => {
+        {filteredPokemon.map((pokemon) => {
           const url = new URL(pokemon.url);
           const paths = url.pathname.split("/");
           const id = paths[paths.length - 2];
