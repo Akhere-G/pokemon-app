@@ -28,7 +28,6 @@ function PokemonList() {
 
   useEffect(() => {
     if (morePokemonData) {
-      console.log("more pokemon", morePokemonData);
       setPokemonList((prev) => ({
         ...morePokemonData,
         results: prev?.results?.concat(morePokemonData.results) ?? [],

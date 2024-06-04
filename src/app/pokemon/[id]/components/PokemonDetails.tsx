@@ -11,67 +11,9 @@ import Image from "next/image";
 import { capitalise, getFrontImage, typeToColor } from "@/app/services/utils";
 import { FlavorTextEntry } from "@/app/types/pokemonTypes";
 import Link from "next/link";
-
-const Field = ({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) => {
-  return (
-    <div className="flex justify-between gap-2 border-b-2 mb-2 items-baseline w-full py-2">
-      <p>{label}</p>
-      {children}
-    </div>
-  );
-};
-
-const Entries = ({
-  entries,
-  max = 5,
-}: {
-  entries: FlavorTextEntry[];
-  max?: number;
-}) => {
-  return (
-    <div className="flex flex-col gap-5">
-      {entries
-        .filter((entry, i) => entry.language.name === "en" && i < max)
-        .map((entry) => {
-          return (
-            <section key={entry.version.name} className="border-b-2">
-              <p className="text-xl mb-1 text-green-900 font-semibold">
-                {capitalise(entry.version.name)}
-              </p>
-              <p>{entry.flavor_text}</p>
-            </section>
-          );
-        })}
-    </div>
-  );
-};
-interface Stat {
-  base_stat: number;
-  stat: {
-    name: string;
-  };
-}
-const Stats = ({ stats }: { stats: Stat[] }) => {
-  return (
-    <div className="flex justify-center md:justify-between gap-2 flex-wrap items-center mb-4">
-      {stats.map(({ stat, base_stat }) => (
-        <div
-          className="text-center rounded-full border-4 p-4 w-36 h-36 flex items-center justify-center flex-col gap-4"
-          key={stat.name}
-        >
-          <p>{stat.name.split("-").map(capitalise).join(" ")}</p>
-          <p>{base_stat}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+import Field from "./Field";
+import FlavourTextEntries from "./FlavourTextEntries";
+import Stats from "./Stats";
 
 function PokemonDetails() {
   const { id } = useParams<{ id: string }>();
@@ -135,22 +77,20 @@ function PokemonDetails() {
 
           <div className="w-full">
             <Field label="Cry">
-              <>
-                <button
-                  onClick={() => {
-                    if (audioRef.current) {
-                      audioRef.current.play();
-                    }
-                  }}
-                  className="primary-btn"
-                >
-                  Play Cry
-                </button>
-                <audio ref={audioRef}>
-                  <source src={cries.latest} type="audio/ogg" />
-                  Your browser does not support the audio element.
-                </audio>
-              </>
+              <button
+                onClick={() => {
+                  if (audioRef.current) {
+                    audioRef.current.play();
+                  }
+                }}
+                className="primary-btn"
+              >
+                Play Cry
+              </button>
+              <audio ref={audioRef}>
+                <source src={cries.latest} type="audio/ogg" />
+                Your browser does not support the audio element.
+              </audio>
             </Field>
             <Field label="Type">
               <p className="flex gap-2 flex-wrap justify-end">
@@ -208,7 +148,7 @@ function PokemonDetails() {
         </div>
         <div className="md:w-[1.5px] md:bg-slate-200 md:mx-4" />
         <div className="flex-1 sm:h-[100%]">
-          <Entries entries={flavor_text_entries} />
+          <FlavourTextEntries entries={flavor_text_entries} />
         </div>
       </div>
       <h2 className="text-2xl text-center mb-4">Stats</h2>
