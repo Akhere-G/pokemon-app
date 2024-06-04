@@ -12,7 +12,6 @@ export default function Search() {
       placeholder="Enter pokemon name"
       onChange={(e) => {
         const current = new URLSearchParams(Array.from(searchParams.entries()));
-
         const value = e.target.value.trim();
 
         if (!value) {
