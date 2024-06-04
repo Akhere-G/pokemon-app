@@ -13,3 +13,7 @@ body {
 .link {
   @apply transition-colors hover:transition-colors hover:text-green-800;
 }
+
+.primary-btn {
+  @apply border-2 p-1 rounded-md shadow-sm border-green-700 text-green-700 transition-colors hover:transition-colors hover:bg-[#dddd];
+}

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { useParams } from "next/navigation";
 import {
   queryClient,
@@ -40,7 +40,7 @@ const Entries = ({
         .filter((entry, i) => entry.language.name === "en" && i < max)
         .map((entry) => {
           return (
-            <section className="border-b-2">
+            <section key={entry.version.name} className="border-b-2">
               <p className="text-xl mb-1 text-green-900 font-semibold">
                 {capitalise(entry.version.name)}
               </p>
@@ -76,6 +76,7 @@ const Stats = ({ stats }: { stats: Stat[] }) => {
 function PokemonDetails() {
   const { id } = useParams<{ id: string }>();
 
+  const audioRef = useRef<null | HTMLAudioElement>(null);
   const pokemonDetails = useFetchPokemon(id);
   const pokemonSpeciesDetails = useFetchPokemonSpecies(id);
 
@@ -133,6 +134,24 @@ function PokemonDetails() {
           />
 
           <div className="w-full">
+            <Field label="Cry">
+              <>
+                <button
+                  onClick={() => {
+                    if (audioRef.current) {
+                      audioRef.current.play();
+                    }
+                  }}
+                  className="primary-btn"
+                >
+                  Play Cry
+                </button>
+                <audio ref={audioRef}>
+                  <source src={cries.latest} type="audio/ogg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </>
+            </Field>
             <Field label="Type">
               <p className="flex gap-2 flex-wrap justify-end">
                 {types.map(({ type: { name } }) => (
