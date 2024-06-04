@@ -7,29 +7,25 @@ export default function Search() {
   const searchParams = useSearchParams();
 
   return (
-    <div>
-      <input
-        className="rounded p-1"
-        placeholder="Enter pokemon name"
-        onChange={(e) => {
-          const current = new URLSearchParams(
-            Array.from(searchParams.entries())
-          );
+    <input
+      className="rounded p-1"
+      placeholder="Enter pokemon name"
+      onChange={(e) => {
+        const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-          const value = e.target.value.trim();
+        const value = e.target.value.trim();
 
-          if (!value) {
-            current.delete("search");
-          } else {
-            current.set("search", e.target.value);
-          }
+        if (!value) {
+          current.delete("search");
+        } else {
+          current.set("search", e.target.value);
+        }
 
-          const search = current.toString();
-          const query = search ? `?${search}` : "";
+        const search = current.toString();
+        const query = search ? `?${search}` : "";
 
-          router.push(`/${query}`);
-        }}
-      />
-    </div>
+        router.push(`/${query}`);
+      }}
+    />
   );
 }
