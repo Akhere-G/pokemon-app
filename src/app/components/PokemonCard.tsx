@@ -17,7 +17,7 @@ export default function PokemonCard({
       <div>
         <Image
           src={getFrontImage(id)}
-          alt={`iamge of pokemon ${name}`}
+          alt={`image of pokemon ${name}`}
           width={150}
           height={150}
         />
