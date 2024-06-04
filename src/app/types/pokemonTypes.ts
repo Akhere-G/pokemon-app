@@ -31,17 +31,21 @@ export const PokemonSchema = z.object({
 
 export type Pokemon = z.infer<typeof PokemonSchema>;
 
+const FlavourTextEntrySchema = z.object({
+  flavor_text: z.string(),
+  language: LinkSchema,
+  version: LinkSchema,
+});
+
+export type FlavorTextEntry = z.infer<typeof FlavourTextEntrySchema>;
+
 export const PokemonSpeciesSchema = z.object({
   base_happiness: z.number(),
   capture_rate: z.number(),
   color: z.object({ name: z.string() }),
   evolves_from_species: z.object({ name: z.string(), url: z.string() }),
-  flavor_text_entries: z.object({
-    flavor_text: z.string(),
-    language: LinkSchema,
-    version: LinkSchema,
-  }),
-  genera: z.object({ genus: z.string(), language: LinkSchema }),
+  flavor_text_entries: z.array(FlavourTextEntrySchema),
+  genera: z.array(z.object({ genus: z.string(), language: LinkSchema })),
   is_baby: z.boolean(),
   is_legendary: z.boolean(),
   is_mythical: z.boolean(),

@@ -7,7 +7,7 @@ export default function Header() {
     <div className="bg-green-500 p-2 w-full">
       <div className="mx-auto max-w-7xl flex items-center flex-col sm:flex-row sm:justify-between">
         <Link href="/">
-          <h1 className="text-bold text-2xl text-white">Pokemon App</h1>
+          <h1 className="font-bold text-2xl text-white">Pokemon App</h1>
         </Link>
         <Search />
       </div>

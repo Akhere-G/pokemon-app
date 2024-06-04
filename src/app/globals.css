@@ -7,5 +7,9 @@ body {
 }
 
 .pill {
-  @apply text-white py-1 px-4 rounded-full;
+  @apply text-white py-1 px-4 rounded-full font-semibold;
+}
+
+.link {
+  @apply transition-colors hover:transition-colors hover:text-green-800;
 }

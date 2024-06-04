@@ -12,7 +12,7 @@ export default function PokemonCard({
   return (
     <Link
       href={`/pokemon/${id}`}
-      className="transition-colors hover:transition-colors hover:text-green-800 bg-white shadow-md rounded-md p-4 flex flex-col items-center"
+      className="link bg-white shadow-md rounded-md p-4 flex flex-col items-center"
     >
       <div>
         <Image
