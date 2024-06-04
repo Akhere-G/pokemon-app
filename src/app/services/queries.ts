@@ -1,6 +1,6 @@
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Pokemon, PokemonList } from "../types/pokemonTypes";
+import { Pokemon, PokemonList, PokemonSpecies } from "../types/pokemonTypes";
 
 export const queryClient = new QueryClient();
 
@@ -23,6 +23,16 @@ export const useFetchPokemon = (id: string) => {
     queryFn: () =>
       axios
         .get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then((res) => res.data),
+  });
+};
+
+export const useFetchPokemonSpecies = (id: string) => {
+  return useQuery({
+    queryKey: ["pokemon-species", id],
+    queryFn: () =>
+      axios
+        .get<PokemonSpecies>(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
         .then((res) => res.data),
   });
 };

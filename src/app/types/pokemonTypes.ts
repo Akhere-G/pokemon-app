@@ -1,5 +1,7 @@
+import { version } from "os";
 import { z } from "zod";
 
+export const LinkSchema = z.object({ name: z.string(), url: z.string() });
 export const PokemonListSchema = z.object({
   count: z.number(),
   next: z.string().optional(),
@@ -10,7 +12,7 @@ export const PokemonListSchema = z.object({
 export type PokemonList = z.infer<typeof PokemonListSchema>;
 
 export const PokemonSchema = z.object({
-  abilities: z.array(z.object({ name: z.string(), url: z.string() })),
+  abilities: z.array(z.object({ ability: z.object({ name: z.string() }) })),
   cries: z.object({ latest: z.string() }),
   id: z.number(),
   name: z.string(),
@@ -28,3 +30,21 @@ export const PokemonSchema = z.object({
 });
 
 export type Pokemon = z.infer<typeof PokemonSchema>;
+
+export const PokemonSpeciesSchema = z.object({
+  base_happiness: z.number(),
+  capture_rate: z.number(),
+  color: z.object({ name: z.string() }),
+  evolves_from_species: z.object({ name: z.string(), url: z.string() }),
+  flavor_text_entries: z.object({
+    flavor_text: z.string(),
+    language: LinkSchema,
+    version: LinkSchema,
+  }),
+  genera: z.object({ genus: z.string(), language: LinkSchema }),
+  is_baby: z.boolean(),
+  is_legendary: z.boolean(),
+  is_mythical: z.boolean(),
+});
+
+export type PokemonSpecies = z.infer<typeof PokemonSpeciesSchema>;
