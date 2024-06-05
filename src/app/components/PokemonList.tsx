@@ -6,7 +6,7 @@ import {
   useFetchMorePokemon,
   useFetchPokemonList,
 } from "../services/queries";
-import PokemonCard from "./PokemonCard";
+import PokemonCard from "./PokemonCard/PokemonCard";
 import { PokemonList as IPokemonList } from "../types/pokemonTypes";
 import { useSearchParams } from "next/navigation";
 
@@ -52,7 +52,7 @@ function PokemonList() {
     return <h2>Loading...</h2>;
   }
 
-  if (!pokemonList) {
+  if (filteredPokemon.length === 0) {
     return <h2>No pokemon available</h2>;
   }
 
