@@ -9,7 +9,7 @@ export default function FlavourTextEntries({
   max?: number;
 }) {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5" data-testid="flavour-text-list">
       {entries
         .filter((entry, i) => entry.language.name === "en" && i < max)
         .map((entry) => {

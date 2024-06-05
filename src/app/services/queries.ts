@@ -1,5 +1,5 @@
 import { QueryClient, useQuery, useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Pokemon, PokemonList, PokemonSpecies } from "../types/pokemonTypes";
 
 export const queryClient = new QueryClient();
@@ -36,19 +36,21 @@ export const useFetchMorePokemon = (limit: number = 3, offset: number = 0) => {
 export const useFetchPokemon = (id: string) => {
   return useQuery({
     queryKey: ["pokemon", id],
-    queryFn: () =>
-      axios
-        .get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${id}`)
-        .then((res) => res.data),
-  });
-};
+    queryFn: async () => {
+      try {
+        const pokemonDetailsResponse = await axios.get<Pokemon>(
+          `https://pokeapi.co/api/v2/pokemon/${id}`
+        );
+        const pokemonSpeciesResponse = await axios.get<PokemonSpecies>(
+          `https://pokeapi.co/api/v2/pokemon-species/${id}`
+        );
 
-export const useFetchPokemonSpecies = (id: string) => {
-  return useQuery({
-    queryKey: ["pokemon-species", id],
-    queryFn: () =>
-      axios
-        .get<PokemonSpecies>(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
-        .then((res) => res.data),
+        const pokemonData = pokemonDetailsResponse.data;
+        const pokemonSpeciesData = pokemonSpeciesResponse.data;
+        return { pokemonData, pokemonSpeciesData };
+      } catch (err: any) {
+        console.log(err?.message);
+      }
+    },
   });
 };

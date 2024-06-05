@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import PokemonCard from "./PokemonCard";
-
 jest.mock("next/navigation");
 jest.mock("next/image");
 

@@ -1,36 +1,33 @@
 "use client";
 import React, { useRef } from "react";
 import { useParams } from "next/navigation";
-import {
-  queryClient,
-  useFetchPokemon,
-  useFetchPokemonSpecies,
-} from "@/app/services/queries";
+import { queryClient, useFetchPokemon } from "@/app/services/queries";
 import { QueryClientProvider } from "@tanstack/react-query";
 import Image from "next/image";
 import { capitalise, getFrontImage, typeToColor } from "@/app/services/utils";
-import { FlavorTextEntry } from "@/app/types/pokemonTypes";
-import Link from "next/link";
-import Field from "./Field";
-import FlavourTextEntries from "./FlavourTextEntries";
-import Stats from "./Stats";
 
-function PokemonDetails() {
+import Link from "next/link";
+import Field from "../Field";
+import FlavourTextEntries from "../FlavourTextEntries";
+import Stats from "../Stats";
+
+export function PokemonDetails() {
   const { id } = useParams<{ id: string }>();
 
   const audioRef = useRef<null | HTMLAudioElement>(null);
-  const pokemonDetails = useFetchPokemon(id);
-  const pokemonSpeciesDetails = useFetchPokemonSpecies(id);
+  const allPokemonData = useFetchPokemon(id);
 
-  if (pokemonDetails.isLoading || pokemonSpeciesDetails.isLoading) {
+  if (allPokemonData.isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!pokemonDetails.data || !pokemonSpeciesDetails.data) {
+  if (!allPokemonData.data) {
     return <p>No pokemon with this id exists</p>;
   }
+  const pokemonDetails = allPokemonData.data.pokemonData;
+  const pokemonSpeciesDetails = allPokemonData.data.pokemonSpeciesData;
 
-  const { abilities, cries, name, stats, types } = pokemonDetails.data;
+  const { abilities, cries, name, stats, types } = pokemonDetails;
 
   const {
     base_happiness,
@@ -41,7 +38,7 @@ function PokemonDetails() {
     is_baby,
     is_legendary,
     is_mythical,
-  } = pokemonSpeciesDetails.data;
+  } = pokemonSpeciesDetails;
 
   let evolvesFromSpeciesId = "";
 
@@ -49,6 +46,7 @@ function PokemonDetails() {
     const paths = evolves_from_species.url.split("/");
     evolvesFromSpeciesId = paths[paths.length - 2];
   }
+
   const tags: string[] = [];
   if (is_baby) {
     tags.push("Baby");
@@ -59,6 +57,12 @@ function PokemonDetails() {
   if (is_mythical) {
     tags.push("Mythical");
   }
+
+  const playSound = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
 
   return (
     <div>
@@ -74,17 +78,9 @@ function PokemonDetails() {
             width={200}
             height={200}
           />
-
           <div className="w-full">
             <Field label="Cry">
-              <button
-                onClick={() => {
-                  if (audioRef.current) {
-                    audioRef.current.play();
-                  }
-                }}
-                className="primary-btn"
-              >
+              <button onClick={playSound} className="primary-btn">
                 Play Cry
               </button>
               <audio ref={audioRef}>
@@ -120,7 +116,10 @@ function PokemonDetails() {
             </Field>
             {evolves_from_species && (
               <Field label="Evolves from">
-                <Link className="link" href={`pokemon/${evolvesFromSpeciesId}`}>
+                <Link
+                  className="link"
+                  href={`/pokemon/${evolvesFromSpeciesId}`}
+                >
                   {capitalise(evolves_from_species.name)}
                 </Link>
               </Field>
@@ -157,7 +156,7 @@ function PokemonDetails() {
   );
 }
 
-export default function PokemonDetailsWithQueryClient() {
+export default function PokemonDetailsConnected() {
   return (
     <QueryClientProvider client={queryClient}>
       <PokemonDetails />

@@ -1,0 +1,248 @@
+{
+  "pokemonData": {
+    "abilities": [
+      {
+        "ability": {
+          "name": "pressure",
+          "url": "https://pokeapi.co/api/v2/ability/46/"
+        },
+        "is_hidden": false,
+        "slot": 1
+      },
+      {
+        "ability": {
+          "name": "unnerve",
+          "url": "https://pokeapi.co/api/v2/ability/127/"
+        },
+        "is_hidden": true,
+        "slot": 3
+      }
+    ],
+    "base_experience": 340,
+    "cries": {
+      "latest": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/150.ogg",
+      "legacy": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/150.ogg"
+    },
+    "forms": [
+      { "name": "mewtwo", "url": "https://pokeapi.co/api/v2/pokemon-form/150/" }
+    ],
+
+    "height": 20,
+    "held_items": [],
+    "id": 150,
+    "is_default": true,
+    "location_area_encounters": "https://pokeapi.co/api/v2/pokemon/150/encounters",
+    "name": "mewtwo",
+    "order": 245,
+    "past_abilities": [],
+    "past_types": [],
+    "species": {
+      "name": "mewtwo",
+      "url": "https://pokeapi.co/api/v2/pokemon-species/150/"
+    },
+    "sprites": {
+      "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/150.png",
+      "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
+    },
+    "stats": [
+      {
+        "base_stat": 106,
+        "effort": 0,
+        "stat": { "name": "hp", "url": "https://pokeapi.co/api/v2/stat/1/" }
+      },
+      {
+        "base_stat": 110,
+        "effort": 0,
+        "stat": { "name": "attack", "url": "https://pokeapi.co/api/v2/stat/2/" }
+      },
+      {
+        "base_stat": 90,
+        "effort": 0,
+        "stat": {
+          "name": "defense",
+          "url": "https://pokeapi.co/api/v2/stat/3/"
+        }
+      },
+      {
+        "base_stat": 154,
+        "effort": 3,
+        "stat": {
+          "name": "special-attack",
+          "url": "https://pokeapi.co/api/v2/stat/4/"
+        }
+      },
+      {
+        "base_stat": 90,
+        "effort": 0,
+        "stat": {
+          "name": "special-defense",
+          "url": "https://pokeapi.co/api/v2/stat/5/"
+        }
+      },
+      {
+        "base_stat": 130,
+        "effort": 0,
+        "stat": { "name": "speed", "url": "https://pokeapi.co/api/v2/stat/6/" }
+      }
+    ],
+    "types": [
+      {
+        "slot": 1,
+        "type": {
+          "name": "psychic",
+          "url": "https://pokeapi.co/api/v2/type/14/"
+        }
+      }
+    ],
+    "weight": 1220
+  },
+  "pokemonSpeciesData": {
+    "base_happiness": 0,
+    "capture_rate": 3,
+    "color": {
+      "name": "purple",
+      "url": "https://pokeapi.co/api/v2/pokemon-color/7/"
+    },
+    "egg_groups": [
+      { "name": "no-eggs", "url": "https://pokeapi.co/api/v2/egg-group/15/" }
+    ],
+    "evolution_chain": {
+      "url": "https://pokeapi.co/api/v2/evolution-chain/77/"
+    },
+    "evolves_from_species": null,
+    "flavor_text_entries": [
+      {
+        "flavor_text": "It was created by\na scientist after\nyears of horrific\fgene splicing and\nDNA engineering\nexperiments.",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        },
+        "version": {
+          "name": "red",
+          "url": "https://pokeapi.co/api/v2/version/1/"
+        }
+      },
+      {
+        "flavor_text": "It was created by\na scientist after\nyears of horrific\fgene splicing and\nDNA engineering\nexperiments.",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        },
+        "version": {
+          "name": "blue",
+          "url": "https://pokeapi.co/api/v2/version/2/"
+        }
+      },
+      {
+        "flavor_text": "Its DNA is almost\nthe same as MEW's.\nHowever, its size\fand disposition\nare vastly dif­\nferent.",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        },
+        "version": {
+          "name": "yellow",
+          "url": "https://pokeapi.co/api/v2/version/3/"
+        }
+      },
+      {
+        "flavor_text": "Because its battle\nabilities were\nraised to the\fultimate level, it\nthinks only of de­\nfeating its foes.",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        },
+        "version": {
+          "name": "gold",
+          "url": "https://pokeapi.co/api/v2/version/4/"
+        }
+      },
+      {
+        "flavor_text": "It usually remains\nmotionless to con­\nserve energy, so\fthat it may un­\nleash its full\npower in battle.",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        },
+        "version": {
+          "name": "silver",
+          "url": "https://pokeapi.co/api/v2/version/5/"
+        }
+      },
+      {
+        "flavor_text": "Said to rest qui­\netly in an\nundiscovered cave,\fthis POKéMON was\ncreated solely for\nbattling.",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        },
+        "version": {
+          "name": "crystal",
+          "url": "https://pokeapi.co/api/v2/version/6/"
+        }
+      },
+      {
+        "flavor_text": "MEWTWO is a POKéMON that was created\nby genetic manipulation.\nHowever, even though the scientific\fpower of humans created this POKéMON’s\nbody, they failed to endow MEWTWO with\na compassionate heart.",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        },
+        "version": {
+          "name": "ruby",
+          "url": "https://pokeapi.co/api/v2/version/7/"
+        }
+      },
+      {
+        "flavor_text": "MEWTWO is a POKéMON that was created\nby genetic manipulation.\nHowever, even though the scientific\fpower of humans created this POKéMON’s\nbody, they failed to endow MEWTWO with\na compassionate heart.",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        },
+        "version": {
+          "name": "sapphire",
+          "url": "https://pokeapi.co/api/v2/version/8/"
+        }
+      }
+    ],
+    "form_descriptions": [],
+    "forms_switchable": true,
+    "gender_rate": -1,
+    "genera": [
+      {
+        "genus": "Pokémon Genetico",
+        "language": {
+          "name": "it",
+          "url": "https://pokeapi.co/api/v2/language/8/"
+        }
+      },
+      {
+        "genus": "Genetic Pokémon",
+        "language": {
+          "name": "en",
+          "url": "https://pokeapi.co/api/v2/language/9/"
+        }
+      }
+    ],
+    "generation": {
+      "name": "generation-i",
+      "url": "https://pokeapi.co/api/v2/generation/1/"
+    },
+    "growth_rate": {
+      "name": "slow",
+      "url": "https://pokeapi.co/api/v2/growth-rate/1/"
+    },
+    "habitat": {
+      "name": "rare",
+      "url": "https://pokeapi.co/api/v2/pokemon-habitat/5/"
+    },
+    "has_gender_differences": false,
+    "hatch_counter": 120,
+    "id": 150,
+    "is_baby": false,
+    "is_legendary": true,
+    "is_mythical": false,
+    "name": "mewtwo",
+    "order": 182,
+
+    "shape": {
+      "name": "upright",
+      "url": "https://pokeapi.co/api/v2/pokemon-shape/6/"
+    }
+  }
+}

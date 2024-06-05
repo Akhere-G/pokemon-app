@@ -1,5 +1,5 @@
 import React from "react";
-import PokemonDetails from "./components/PokemonDetails";
+import PokemonDetails from "./components/PokemonDetails/PokemonDetails";
 
 export default function page() {
   return (
